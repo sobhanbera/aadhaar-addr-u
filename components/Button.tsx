@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import {Text, TouchableOpacity} from 'react-native';
 import {COLORS} from '../constants';
 
 interface Props {
     onPress: Function;
     title: string;
+    style?: StyleProp<ViewStyle>;
 }
 const Button = (props: Props) => {
     return (
@@ -15,6 +16,7 @@ const Button = (props: Props) => {
                 {
                     borderColor: COLORS.grey + '55',
                 },
+                props.style,
             ]}
             activeOpacity={0.7}
             onPress={() => props.onPress()}>
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
         marginVertical: 20,
         paddingHorizontal: 18,
         backgroundColor: COLORS.themecolorrevert,
-        flexGrow: 2, // gives the full available space
+        flexGrow: 1.1, // gives the full available space
     },
     buttonText: {
         textAlign: 'center',
