@@ -7,6 +7,8 @@ import {
     View,
     ToastAndroid,
     TouchableOpacity,
+    ImageBackground,
+    Image,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -17,6 +19,7 @@ import {COLORS, ACTUAL_STATES_ARRAY, EVERY_DISTRICT_ARRAY} from '../constants';
 import Title from '../components/Title';
 import Button from '../components/Button';
 import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import {Alert} from 'react-native';
 import {Text} from 'react-native';
 import {capitalizeWords} from '../constants/utils';
@@ -298,195 +301,232 @@ const App = () => {
         line1,
         line2,
     );
+
     return (
         <SafeAreaView
             style={{
                 flex: 1,
             }}>
-            <StatusBar
-                translucent={false}
-                backgroundColor={COLORS.themecolor}
-                barStyle="dark-content"
-            />
-            <Header
-                title={'Aadhaar Address Updater'}
-                onPressClearInputsButton={() => clearInputs()}
-            />
-            <ScrollView
-                showsVerticalScrollIndicator={false}
+            <View
                 style={{
-                    marginHorizontal: 20,
+                    backgroundColor: COLORS.themecolor,
                 }}>
-                <Title title="Name in Aadhaar Card" />
-                <TextInput
-                    focusable
-                    placeholder={'Enter The Name in Aadhaar Card'}
-                    value={name}
-                    onChangeText={setName}
-                    {...CommonTextInputProps}
+                <StatusBar
+                    translucent={false}
+                    backgroundColor={COLORS.themecolor}
+                    barStyle="light-content"
                 />
+                <MainHeader />
 
-                {/* <KeyboardAvoidingView behavior="padding" style={{flex: 1}}> */}
-                <Title title="Aadhaar Number (12 digits)" />
-                <TextInput
-                    focusable
-                    placeholder={'Enter Your Aadhaar Number'}
-                    value={aadhaarDisplay}
-                    onChangeText={isValidAadhaar}
-                    maxLength={14} // with spaces
-                    // aadhaar number is of 12 digit and we are giving 1 spaces between every 4 digits so total length would be
-                    // 12 + 1 + 1 = 14
-                    {...CommonTextInputProps}
-                />
-                {aadhaar.length > 0 ? <Title title={error} errorText /> : null}
-
-                <Title title="Mobile Number (10 digits)" />
-                <TextInput
-                    focusable
-                    placeholder={'Enter Your 10 Digits Phone Number'}
-                    value={phone}
-                    onChangeText={setPhone}
-                    maxLength={10}
-                    keyboardType="numeric"
-                    {...CommonTextInputProps}
-                />
-
-                <Title title="PIN Code (6 digits)" />
-                <TextInput
-                    focusable
-                    placeholder={'Enter Your PIN Code'}
-                    value={pin}
-                    onChangeText={setPin}
-                    maxLength={6}
-                    keyboardType="numeric"
-                    {...CommonTextInputProps}
-                />
-
-                <Title title="Enter State Name" />
-                <View
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
                     style={{
-                        marginVertical: 5,
-                        borderRadius: 6,
-                        borderWidth: 0.5,
-                        borderColor: COLORS.themecolorrevert + '45',
+                        backgroundColor: COLORS.themecolor,
                     }}>
-                    <Picker
-                        selectedValue={state}
-                        onValueChange={item => setState(item)}
+                    <Header
+                        title={'Aadhaar Address Updater'}
+                        onPressClearInputsButton={() => clearInputs()}
+                    />
+
+                    <View
                         style={{
-                            fontSize: 16,
-                            borderRadius: 6,
-                            borderColor: COLORS.themecolorrevert + '45',
-                            color: COLORS.themecolorrevert + 'DF',
+                            marginHorizontal: 20,
                         }}>
-                        {ACTUAL_STATES_ARRAY.map((state, index) => {
-                            return (
-                                <Picker.Item
-                                    key={index}
-                                    label={state}
-                                    value={state}
-                                />
-                            );
-                        })}
-                    </Picker>
-                </View>
+                        <Title title="Name in Aadhaar Card" />
+                        <TextInput
+                            focusable
+                            placeholder={'Enter The Name in Aadhaar Card'}
+                            value={name}
+                            onChangeText={setName}
+                            {...CommonTextInputProps}
+                        />
 
-                <Title title="Enter District Name" />
-                <View
-                    style={{
-                        marginVertical: 5,
-                        borderRadius: 6,
-                        borderWidth: 0.5,
-                        borderColor: COLORS.themecolorrevert + '45',
-                    }}>
-                    <Picker
-                        selectedValue={district}
-                        onValueChange={item => setDistrict(item)}
-                        style={{
-                            fontSize: 16,
-                            borderRadius: 6,
-                            borderColor: COLORS.themecolorrevert + '45',
-                            color: COLORS.themecolorrevert + 'DF',
-                        }}>
-                        {EVERY_DISTRICT_ARRAY[state].map((district, index) => {
-                            return (
-                                <Picker.Item
-                                    key={index}
-                                    label={district}
-                                    value={district}
-                                />
-                            );
-                        })}
-                    </Picker>
-                </View>
+                        {/* <KeyboardAvoidingView behavior="padding" style={{flex: 1}}> */}
+                        <Title title="Aadhaar Number (12 digits)" />
+                        <TextInput
+                            focusable
+                            placeholder={'Enter Your Aadhaar Number'}
+                            value={aadhaarDisplay}
+                            onChangeText={isValidAadhaar}
+                            maxLength={14} // with spaces
+                            // aadhaar number is of 12 digit and we are giving 1 spaces between every 4 digits so total length would be
+                            // 12 + 1 + 1 = 14
+                            {...CommonTextInputProps}
+                        />
+                        {aadhaar.length > 0 ? (
+                            <Title title={error} errorText />
+                        ) : null}
 
-                <Title title="Address Line 1" />
-                <TextInput
-                    focusable
-                    placeholder={'Enter Your Address Line 1'}
-                    value={line1}
-                    onChangeText={setLine1}
-                    {...CommonTextInputProps}
-                />
+                        <Title title="Mobile Number (10 digits)" />
+                        <TextInput
+                            focusable
+                            placeholder={'Enter Your 10 Digits Phone Number'}
+                            value={phone}
+                            onChangeText={setPhone}
+                            maxLength={10}
+                            keyboardType="numeric"
+                            {...CommonTextInputProps}
+                        />
 
-                <Title title="Address Line 2" />
-                <TextInput
-                    focusable
-                    placeholder={'Enter Your Address Line 2 (optional)'}
-                    value={line2}
-                    onChangeText={setLine2}
-                    {...CommonTextInputProps}
-                />
+                        <Title title="PIN Code (6 digits)" />
+                        <TextInput
+                            focusable
+                            placeholder={'Enter Your PIN Code'}
+                            value={pin}
+                            onChangeText={setPin}
+                            maxLength={6}
+                            keyboardType="numeric"
+                            {...CommonTextInputProps}
+                        />
 
-                <Title title="Parsed Final Address" bold />
-                <Text
-                    style={{
-                        fontSize: 16,
-                        textAlign: 'left',
-                    }}>
-                    {parsedAddress}
-                </Text>
-
-                <Button
-                    title={'Save This Data'}
-                    onPress={() => addNewHistory()}
-                />
-
-                {/* history area */}
-                {history.length > 0 ? (
-                    <View>
-                        <Title title="History" bold />
+                        <Title title="Enter State Name" />
                         <View
                             style={{
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
+                                marginVertical: 5,
+                                borderRadius: 6,
+                                borderWidth: 0.5,
+                                borderColor: COLORS.themecolorrevert + '45',
                             }}>
-                            <Button
-                                title="Reload"
-                                onPress={() => loadHistory()}
-                            />
-                            <Button
-                                title="Delete"
-                                onPress={() => deleteAllHistory()}
+                            <Picker
+                                selectedValue={state}
+                                onValueChange={item => setState(item)}
+                                style={{
+                                    fontSize: 16,
+                                    borderRadius: 6,
+                                    borderColor: COLORS.themecolorrevert + '45',
+                                    color: COLORS.themecolorrevert + 'DF',
+                                }}>
+                                {ACTUAL_STATES_ARRAY.map((state, index) => {
+                                    return (
+                                        <Picker.Item
+                                            key={index}
+                                            label={state}
+                                            value={state}
+                                        />
+                                    );
+                                })}
+                            </Picker>
+                        </View>
+
+                        <Title title="Enter District Name" />
+                        <View
+                            style={{
+                                marginVertical: 5,
+                                borderRadius: 6,
+                                borderWidth: 0.5,
+                                borderColor: COLORS.themecolorrevert + '45',
+                            }}>
+                            <Picker
+                                selectedValue={district}
+                                onValueChange={item => setDistrict(item)}
+                                style={{
+                                    fontSize: 16,
+                                    borderRadius: 6,
+                                    borderColor: COLORS.themecolorrevert + '45',
+                                    color: COLORS.themecolorrevert + 'DF',
+                                }}>
+                                {EVERY_DISTRICT_ARRAY[state].map(
+                                    (district, index) => {
+                                        return (
+                                            <Picker.Item
+                                                key={index}
+                                                label={district}
+                                                value={district}
+                                            />
+                                        );
+                                    },
+                                )}
+                            </Picker>
+                        </View>
+
+                        <Title title="Address Line 1" />
+                        <TextInput
+                            focusable
+                            placeholder={'Enter Your Address Line 1'}
+                            value={line1}
+                            onChangeText={setLine1}
+                            {...CommonTextInputProps}
+                        />
+
+                        <Title title="Address Line 2" />
+                        <TextInput
+                            focusable
+                            placeholder={'Enter Your Address Line 2 (optional)'}
+                            value={line2}
+                            onChangeText={setLine2}
+                            {...CommonTextInputProps}
+                        />
+
+                        <Title title="Parsed Final Address" bold />
+                        <Text
+                            style={{
+                                fontSize: 16,
+                                textAlign: 'left',
+                            }}>
+                            {parsedAddress}
+                        </Text>
+
+                        <Button
+                            title={'Save This Data'}
+                            onPress={() => addNewHistory()}
+                        />
+
+                        {/* history area */}
+                        {history.length > 0 ? (
+                            <View>
+                                <Title title="History" bold />
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                    }}>
+                                    <Button
+                                        title="Reload"
+                                        onPress={() => loadHistory()}
+                                    />
+                                    <Button
+                                        title="Delete"
+                                        onPress={() => deleteAllHistory()}
+                                    />
+                                </View>
+
+                                {history.map((item, index) => {
+                                    return (
+                                        <HistoryBlock
+                                            key={index}
+                                            history={item}
+                                            loadData={loadData}
+                                            index={index}
+                                        />
+                                    );
+                                })}
+                            </View>
+                        ) : null}
+
+                        <View
+                            style={{
+                                width: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                flex: 1,
+                            }}>
+                            <Image
+                                source={require('../assets/aadhaar.png')}
+                                style={{
+                                    resizeMode: 'cover',
+                                    width: 100,
+                                    height: 100,
+                                    flex: 1,
+                                }}
+                                resizeMode="cover"
                             />
                         </View>
 
-                        {history.map((item, index) => {
-                            return (
-                                <HistoryBlock
-                                    key={index}
-                                    history={item}
-                                    loadData={loadData}
-                                    index={index}
-                                />
-                            );
-                        })}
+                        <View style={{paddingBottom: 200}} />
+                        {/* </KeyboardAvoidingView> */}
                     </View>
-                ) : null}
-
-                <View style={{paddingBottom: 200}} />
-                {/* </KeyboardAvoidingView> */}
-            </ScrollView>
+                </ScrollView>
+            </View>
         </SafeAreaView>
     );
 };
@@ -535,6 +575,7 @@ const HistoryBlock = (props: {
                             paddingLeft: 5,
                             paddingRight: 10,
                             fontWeight: 'bold',
+                            color: COLORS.themecolorrevert,
                         }}>
                         {index + 1}.
                     </Text>
@@ -551,12 +592,17 @@ const HistoryBlock = (props: {
                             numberOfLines={1}
                             style={{
                                 fontWeight: showDetail ? 'bold' : '400',
+                                color: COLORS.themecolorrevert + '9A',
                             }}>
                             {history.aadhaar}
                         </Text>
                     </View>
                 </View>
-                <FontAwesome name="angle-down" size={20} />
+                <FontAwesome
+                    name="angle-down"
+                    size={20}
+                    color={COLORS.themecolorrevert}
+                />
             </View>
 
             {showDetail ? (
@@ -564,7 +610,12 @@ const HistoryBlock = (props: {
                     style={{
                         paddingVertical: 10,
                     }}>
-                    <Text>Saved On: {timestamp}</Text>
+                    <Text
+                        style={{
+                            color: COLORS.themecolorrevert + '9A',
+                        }}>
+                        Saved On: {timestamp}
+                    </Text>
 
                     {history.phone ? (
                         <Title title={'Phone Number: +91 ' + history.phone} />

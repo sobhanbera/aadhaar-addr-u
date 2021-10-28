@@ -8,12 +8,12 @@ export const DEVICE_STATUSBAR_HEIGHT_CONSTANT = StatusBarManager.HEIGHT;
 export const COLORS = {
     grey: '#7F7F7F',
 
-    themecolor: '#FFFFFF',
-    themecolorrevert: '#000000',
+    themecolorrevert: '#FFFFFF',
+    themecolor: '#000000',
 
-    surface: '#EFEFEF',
-    surfacedark: '#AFAFAF',
-    border: '#DFDFDF',
+    surface: '#21242b',
+    surfacedark: '#050505',
+    border: '#303030',
     placeholder: '#404040',
 
     error: '#FF5500',
