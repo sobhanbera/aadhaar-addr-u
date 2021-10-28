@@ -1,0 +1,51 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            // "@assets/*": ["./app/assets/*"],
+            // "@components/*": ["./app/components/*"],
+            // "@constants/*": ["./app/constants/*"],
+            // "@navigations/*": ["./app/navigations/*"],
+            // "@screens/*": ["./app/screens/*"],
+            // "@styles/*": ["./app/styles/*"],
+            // "@store/*": ["./app/store/*"],
+            // "@themes/*": ["./app/themes/*"],
+            // "@utils/*": ["./app/utils*"]
+        },
+        "target": "esnext",
+        "module": "commonjs",
+        "lib": ["es2017"],
+        "allowJs": true,
+        "checkJs": false,
+        "jsx": "react-native",
+        "sourceMap": false,
+        "removeComments": false,
+        "noEmit": true,
+        "incremental": true,
+        "importHelpers": true,
+        "isolatedModules": true,
+        "strict": false,
+        "noImplicitAny": true,
+        "declaration": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "skipLibCheck": false,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true
+        // "strictPropertyInitialization": true,
+        // "noImplicitThis": true,
+        // "alwaysStrict": true
+        // "noImplicitReturns": true,
+        // "noFallthroughCasesInSwitch": true,
+    },
+    "exclude": [
+        "node_modules",
+        "babel.config.js",
+        "metro.config.js",
+        "jest.config.js"
+    ],
+    "typeRoots": ["node_modules/@types", "@types"]
+}
