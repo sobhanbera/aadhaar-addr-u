@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import AsyncStorage from '@react-native-community/async-storage';
 import dayjs from 'dayjs';
 
@@ -388,6 +390,13 @@ const App = () => {
                                 borderColor: COLORS.themecolorrevert + '45',
                             }}>
                             <Picker
+                                mode="dropdown"
+                                itemStyle={{
+                                    backgroundColor: COLORS.themecolor + 'EF',
+                                    color: COLORS.themecolorrevert,
+                                }}
+                                dropdownIconColor={COLORS.themecolor}
+                                dropdownIconRippleColor={COLORS.themecolor}
                                 selectedValue={state}
                                 onValueChange={item => setState(item)}
                                 style={{
@@ -395,10 +404,19 @@ const App = () => {
                                     borderRadius: 6,
                                     borderColor: COLORS.themecolorrevert + '45',
                                     color: COLORS.themecolorrevert + 'DF',
+                                    backgroundColor: COLORS.themecolor + 'EF',
+                                    marginVertical: 0,
+                                    paddingVertical: 0,
                                 }}>
                                 {ACTUAL_STATES_ARRAY.map((state, index) => {
                                     return (
                                         <Picker.Item
+                                            color={COLORS.themecolorrevert}
+                                            style={{
+                                                color: COLORS.themecolorrevert,
+                                                backgroundColor:
+                                                    COLORS.themecolor + 'EF',
+                                            }}
                                             key={index}
                                             label={state}
                                             value={state}
@@ -417,6 +435,13 @@ const App = () => {
                                 borderColor: COLORS.themecolorrevert + '45',
                             }}>
                             <Picker
+                                mode="dropdown"
+                                itemStyle={{
+                                    backgroundColor: COLORS.themecolor + 'EF',
+                                    color: COLORS.themecolorrevert,
+                                }}
+                                dropdownIconColor={COLORS.themecolor}
+                                dropdownIconRippleColor={COLORS.themecolor}
                                 selectedValue={district}
                                 onValueChange={item => setDistrict(item)}
                                 style={{
@@ -424,11 +449,21 @@ const App = () => {
                                     borderRadius: 6,
                                     borderColor: COLORS.themecolorrevert + '45',
                                     color: COLORS.themecolorrevert + 'DF',
+                                    backgroundColor: COLORS.themecolor + 'EF',
+                                    marginVertical: 0,
+                                    paddingVertical: 0,
                                 }}>
                                 {EVERY_DISTRICT_ARRAY[state].map(
                                     (district, index) => {
                                         return (
                                             <Picker.Item
+                                                color={COLORS.themecolorrevert}
+                                                style={{
+                                                    color: COLORS.themecolorrevert,
+                                                    backgroundColor:
+                                                        COLORS.themecolor +
+                                                        'EF',
+                                                }}
                                                 key={index}
                                                 label={district}
                                                 value={district}
@@ -478,13 +513,21 @@ const App = () => {
                                 <View
                                     style={{
                                         flexDirection: 'row',
-                                        justifyContent: 'space-between',
+                                        justifyContent: 'space-evenly',
                                     }}>
                                     <Button
+                                        style={{
+                                            maxWidth: 130,
+                                            flexGrow: 1,
+                                        }}
                                         title="Reload"
                                         onPress={() => loadHistory()}
                                     />
                                     <Button
+                                        style={{
+                                            maxWidth: 130,
+                                            flexGrow: 1,
+                                        }}
                                         title="Delete"
                                         onPress={() => deleteAllHistory()}
                                     />
@@ -521,6 +564,8 @@ const App = () => {
                                 resizeMode="cover"
                             />
                         </View>
+
+                        <MadeInText />
 
                         <View style={{paddingBottom: 200}} />
                         {/* </KeyboardAvoidingView> */}
@@ -645,6 +690,43 @@ const HistoryBlock = (props: {
                 </View>
             ) : null}
         </TouchableOpacity>
+    );
+};
+
+/**
+ * this section was somewhat looking meesy in the above main component so I made
+ * it as separate component
+ * @returns the made in detail of the application
+ */
+const MadeInText = () => {
+    return (
+        <>
+            <Text
+                style={{
+                    letterSpacing: 1,
+                    color: COLORS.themecolorrevert + 'DF',
+                    textAlignVertical: 'center',
+                    textAlign: 'center',
+                }}>
+                {'Made with '}
+                <MaterialCommunityIcons
+                    name="heart"
+                    size={18 - 2}
+                    color={COLORS.error + 'DF'}
+                />
+                {' by '}
+            </Text>
+            <Text
+                style={[
+                    {
+                        color: '#81E4DA',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                    },
+                ]}>
+                {'Darshan Patil\nVaishnavi Deulkar\nKhushi Mishra\nG. Sakarkar'}
+            </Text>
+        </>
     );
 };
 
