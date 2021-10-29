@@ -283,10 +283,10 @@ const App = () => {
         marginVertical: 5,
         paddingHorizontal: 15,
         paddingVertical: 10,
-        borderWidth: 0.5,
         fontSize: 16,
         borderRadius: 6,
         borderColor: COLORS.themecolorrevert + '45',
+        borderWidth: 0.5,
         color: COLORS.themecolorrevert + 'DF',
     };
     const CommonTextInputProps = {
