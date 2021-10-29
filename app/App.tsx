@@ -125,7 +125,6 @@ const App = () => {
     }
 
     function addNewHistory() {
-        console.log("'", aadhaar, '"');
         if (aadhaar.length !== 12) {
             ToastAndroid.show(
                 'Please enter a valid Aadhaar number',
@@ -168,11 +167,11 @@ const App = () => {
                 /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/,
             )
         ) {
-            console.log(
-                !phone.match(
-                    /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/,
-                ),
-            );
+            // console.log(
+            //     !phone.match(
+            //         /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/,
+            //     ),
+            // );
             ToastAndroid.show(
                 'Please enter a valid Phone number',
                 ToastAndroid.SHORT,
