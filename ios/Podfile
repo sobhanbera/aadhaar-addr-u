@@ -16,6 +16,8 @@ target 'AdhaarAddressUpdater' do
 
   pod 'RNCPicker', :path => '../node_modules/@react-native-picker/picker'
 
+  pod 'RNCClipboard', :path => '../node_modules/@react-native-clipboard/clipboard'
+
   target 'AdhaarAddressUpdaterTests' do
     inherit! :complete
     # Pods for testing
