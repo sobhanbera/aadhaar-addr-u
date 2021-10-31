@@ -12,7 +12,7 @@ import {
 import {Picker} from '@react-native-picker/picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import Clipboard from '@react-native-clipboard/clipboard';
 import AsyncStorage from '@react-native-community/async-storage';
 import dayjs from 'dayjs';
 
@@ -252,6 +252,7 @@ const App = () => {
             [
                 {
                     style: 'cancel',
+                    text: 'Cancel',
                 },
                 {
                     style: 'default',
@@ -492,11 +493,27 @@ const App = () => {
 
                         <Title title="Parsed Final Address" bold />
                         <Text
+                            onLongPress={() => {
+                                Clipboard.setString(parsedAddress);
+                                ToastAndroid.showWithGravity(
+                                    'Address Copied',
+                                    ToastAndroid.SHORT,
+                                    ToastAndroid.CENTER,
+                                );
+                            }}
                             style={{
                                 fontSize: 16,
                                 textAlign: 'left',
                             }}>
                             {parsedAddress}
+                        </Text>
+
+                        <Text
+                            style={{
+                                marginVertical: 10,
+                                fontSize: 14,
+                            }}>
+                            Long Press the address to copy to clipboard.
                         </Text>
 
                         <Button
@@ -600,6 +617,7 @@ const HistoryBlock = (props: {
                 borderTopRightRadius: 5,
                 borderRadius: 5,
             }}
+            disabled
             onPress={() => setShowDetail(value => !value)}>
             <View
                 style={{
@@ -619,7 +637,8 @@ const HistoryBlock = (props: {
                             paddingRight: 10,
                             fontWeight: 'bold',
                             color: COLORS.themecolorrevert,
-                        }}>
+                        }}
+                        onPress={() => setShowDetail(value => !value)}>
                         {index + 1}.
                     </Text>
                     <View>
@@ -628,24 +647,51 @@ const HistoryBlock = (props: {
                                 fontWeight: 'bold',
                                 color: COLORS.themecolorrevert,
                             }}
-                            numberOfLines={1}>
+                            numberOfLines={1}
+                            onPress={() => setShowDetail(value => !value)}>
                             {history.name || `+91 ${history.phone}`}
                         </Text>
+
                         <Text
                             numberOfLines={1}
                             style={{
                                 fontWeight: showDetail ? 'bold' : '400',
                                 color: COLORS.themecolorrevert + '9A',
-                            }}>
+                            }}
+                            onPress={() => setShowDetail(value => !value)}>
                             {history.aadhaar}
                         </Text>
                     </View>
                 </View>
-                <FontAwesome
-                    name="angle-down"
-                    size={20}
-                    color={COLORS.themecolorrevert}
-                />
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        minWidth: 40,
+                        marginRight: 7,
+                    }}>
+                    <FontAwesome
+                        name="copy"
+                        size={16}
+                        color={COLORS.themecolorrevert}
+                        onPress={() => {
+                            Clipboard.setString(history.address);
+                            ToastAndroid.showWithGravity(
+                                'Address Copied',
+                                ToastAndroid.SHORT,
+                                ToastAndroid.CENTER,
+                            );
+                        }}
+                    />
+
+                    <FontAwesome
+                        onPress={() => setShowDetail(value => !value)}
+                        name={showDetail ? 'angle-up' : 'angle-down'}
+                        size={22}
+                        color={COLORS.themecolorrevert}
+                    />
+                </View>
             </View>
 
             {showDetail ? (
@@ -672,7 +718,22 @@ const HistoryBlock = (props: {
                         <Title title={'Address Line 2: ' + history.line2} />
                     ) : null}
 
-                    <Title title={history.address} />
+                    <Text
+                        onPress={() => {
+                            Clipboard.setString(history.address);
+                            ToastAndroid.showWithGravity(
+                                'Address Copied',
+                                ToastAndroid.SHORT,
+                                ToastAndroid.CENTER,
+                            );
+                        }}>
+                        {history.address}{' '}
+                        <FontAwesome
+                            name="copy"
+                            size={16}
+                            color={COLORS.themecolorrevert}
+                        />
+                    </Text>
 
                     <View
                         style={{
